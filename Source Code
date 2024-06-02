@@ -1,4 +1,25 @@
 #(a) Which county had the upward trend of Amebiasis disease regardless of gender? (You are required to create a suitable plot to support the statistical analysis)
+
+
+# First Install Packages for full assignment:
+
+# Packages to be installed.
+install.packages("readxl")
+install.packages("ggplot2")
+install.packages("dplyr")
+install.packages("sf")
+install.packages("leaflet")
+install.packages("tidyverse")
+install.packages("scales")
+install.packages("plotly")
+install.packages("broom")
+install.packages("tidyr")
+install.packages(("viridis")
+install.packages(("forecast")
+install.packages(("tseries")
+
+
+
 # How to extract suitable subsets of data?
 
 # Load required libraries
@@ -196,6 +217,27 @@ ggplot(female_hiv_2005, aes(x = Population, y = Rate)) +
   labs(title = "Relationship Between Population Size and HIV Rate",
        x = "Population of Females",
        y = "Rate of HIV Infection")
+
+ # Filter data for the year 2005, disease HIV, and sex Female
+female_hiv_2005 <- data %>%
+  filter(Year == 2005, Disease == "HIV", Sex == "Female") %>%
+  select(County, Rate, Population)
+
+# Find the county with the highest rate of HIV among females
+highest_rate_county <- female_hiv_2005 %>%
+  arrange(desc(Rate)) %>%
+  slice(1)
+
+# Print the county with the highest rate
+print(highest_rate_county)
+
+# Analyze if the highest rate of infection is associated with the largest population
+population_analysis <- female_hiv_2005 %>%
+  arrange(desc(Population))
+
+# Print population analysis results
+print(population_analysis)
+print(population_analysis, n = 20)  # This will print the first 20 rows of the data frame
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
